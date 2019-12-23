@@ -14,23 +14,28 @@ services:
         ports:
             - "8080:80"
 
+    default-service:
+        image: httpd:2.4.41-alpine
+        build: ./
+        container_name: default-service
+        restart: always
+
     service-1:
-        image: dockercloud/hello-world
+        image: httpd:2.4.41-alpine
+        volumes:
+            - ./service-html/index-service-1.html:/usr/local/apache2/htdocs/index.html:ro
         container_name: service-1
 
-
-
     service-2:
-        image: dockercloud/hello-world
+        image: httpd:2.4.41-alpine
+        volumes:
+            - ./service-html/index-service-2.html:/usr/local/apache2/htdocs/index.html:ro
         container_name: service-2
         ports:
 
             - "8282:80"
 
-    default-service:
-        build: ./
-        container_name: default-service
-        restart: always
+    
 
 
 
