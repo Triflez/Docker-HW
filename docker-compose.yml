@@ -1,6 +1,7 @@
 version: "3"
 
 services:
+
     haproxy:
         image: haproxy:1.8.14-alpine
         volumes:
@@ -27,19 +28,12 @@ services:
             - "8282:80"
 
     default-service:
-        image: dockercloud/hello-world
         build: ./
         container_name: default-service
         restart: always
 
 
-    test-service:
-        image: httpd:2.4.37-alpine
-        build: ./
-        container_name: test-service
-        restart: always
-        ports:
-            - "8383:80"
+
 
 
 
