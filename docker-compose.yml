@@ -1,0 +1,46 @@
+version: "3"
+
+services:
+    haproxy:
+        image: haproxy:1.8.14-alpine
+        volumes:
+            - ./haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+        links:
+            - service-1
+            - service-2
+            - default-service
+        container_name: haproxy
+        ports:
+            - "8080:80"
+
+    service-1:
+        image: dockercloud/hello-world
+        container_name: service-1
+
+
+
+    service-2:
+        image: dockercloud/hello-world
+        container_name: service-2
+        ports:
+
+            - "8282:80"
+
+    default-service:
+        image: dockercloud/hello-world
+        build: ./
+        container_name: default-service
+        restart: always
+
+
+    test-service:
+        image: httpd:2.4.37-alpine
+        build: ./
+        container_name: test-service
+        restart: always
+        ports:
+            - "8383:80"
+
+
+
+
