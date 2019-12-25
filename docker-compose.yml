@@ -1,18 +1,15 @@
 version: "3"
 
 services:
-
     haproxy:
         image: haproxy:1.8.14-alpine
         volumes:
             - ./haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
-        links:
-            - service-1
-            - service-2
-            - default-service
+
         container_name: haproxy
         ports:
             - "8080:80"
+        restart: always
 
     default-service:
         image: httpd:2.4.41-alpine
@@ -24,16 +21,17 @@ services:
         image: httpd:2.4.41-alpine
         volumes:
             - ./service-html/index-service-1.html:/usr/local/apache2/htdocs/index.html:ro
-        container_name: service-1
+        container_name: apache-service-1
+        restart: always
 
     service-2:
         image: httpd:2.4.41-alpine
         volumes:
             - ./service-html/index-service-2.html:/usr/local/apache2/htdocs/index.html:ro
-        container_name: service-2
+        container_name: apache-service-2
         ports:
-
             - "8282:80"
+        restart: always
 
     
 
