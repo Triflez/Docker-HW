@@ -11,20 +11,25 @@ services:
         restart: always
 
     default-service:
-        image: httpd:2.4.37-alpine
         build: ./
+        image: httpd:2.4.37-alpine  #Since this is built with dockerfile, this is redundant, 
+                                    #but i left it because this is also image name. Otherwise image will be named after folder.
+                                    #Image name being the image value shown with "docker ps -a" command.
         container_name: default-service
         restart: always
 
     apache-service-1:
-        image: httpd:2.4.37-alpine
+        
+        build: ./ #Since image has to be built and based on Dockerfile. "image: httpd:2.4.37-alpine" would work the smae in this instance.
+        image: httpd:2.4.37-alpine #for the image name.
         volumes:
             - ./service-html/index-service-1.html:/usr/local/apache2/htdocs/index.html:ro
         container_name: apache-service-1
         restart: always
         
     apache-service-2:
-        image: httpd:2.4.37-alpine
+        build: ./ #Since image has to be built and based on Dockerfile.
+        image: httpd:2.4.37-alpine #for the image name.
         volumes:
             - ./service-html/index-service-2.html:/usr/local/apache2/htdocs/index.html:ro
         container_name: apache-service-2
