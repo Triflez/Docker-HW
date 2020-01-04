@@ -16,14 +16,14 @@ services:
         restart: always
 
     apache-service-1:
-        build: ./ #Since image has to be built and based on Dockerfile. "image: httpd:2.4.37-alpine" would work the same in this instance.
+        build: ./ 
         volumes:
             - ./service-html/index-service-1.html:/usr/local/apache2/htdocs/index.html:ro
         container_name: apache-service-1
         restart: always
         
     apache-service-2:
-        build: ./ #Since image has to be built and based on Dockerfile. "image: httpd:2.4.37-alpine" would work the same in this instance.
+        build: ./ 
         volumes:
             - ./service-html/index-service-2.html:/usr/local/apache2/htdocs/index.html:ro
         container_name: apache-service-2
